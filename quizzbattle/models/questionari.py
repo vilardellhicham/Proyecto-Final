@@ -61,3 +61,4 @@ class Questionari:
     def set_preguntes(self, valor_nuevo):
         self.preguntes = valor_nuevo
         return self.preguntes
+    
