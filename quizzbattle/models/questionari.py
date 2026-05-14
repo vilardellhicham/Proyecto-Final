@@ -1,6 +1,7 @@
+from pregunta import Pregunta
 class Questionari:
     
-    def __init__(self, id_questionari, id_propietari, titol, categoria, dificultat, descripcio, preguntes):
+    def __init__(self, id_questionari:int, id_propietari:int, titol:str, categoria:str, dificultat: int, descripcio : str, preguntes: list[Pregunta]):
         self.id_questionari = id_questionari
         self.id_propietari = id_propietari
         self.titol = titol
@@ -61,3 +62,10 @@ class Questionari:
     def set_preguntes(self, valor_nuevo):
         self.preguntes = valor_nuevo
         return self.preguntes
+    
+    def calcular_puntuacio(self):
+        punts = 0
+        for p in self.preguntes:
+            punts += p.puntuacion
+
+        return punts
