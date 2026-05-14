@@ -1,17 +1,17 @@
 class Usuari:
 
     def __init__(self, id_usuari, nom, nom_usuari, contrassenya, email, data_registre, num_partides, victories, derrotes, empats, puntuacio_total):
-        self.id_usuari = id_usuari
-        self.nom = nom
-        self.nom_usuari = nom_usuari
-        self.contrassenya = contrassenya
-        self.email = email
-        self.data_registre = data_registre
-        self.num_partides = num_partides
-        self.victories = victories
-        self.derrotes = derrotes
-        self.empats = empats
-        self.puntuacio_total = puntuacio_total
+        self._id_usuari = id_usuari
+        self._nom = nom
+        self._nom_usuari = nom_usuari
+        self._contrassenya = contrassenya
+        self._email = email
+        self._data_registre = data_registre
+        self._num_partides = num_partides
+        self._victories = victories
+        self._derrotes = derrotes
+        self._empats = empats
+        self._puntuacio_total = puntuacio_total
 
     # GETTERS
 
