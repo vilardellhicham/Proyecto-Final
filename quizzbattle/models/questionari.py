@@ -2,13 +2,13 @@ from pregunta import Pregunta
 class Questionari:
     
     def __init__(self, id_questionari:int, id_propietari:int, titol:str, categoria:str, dificultat: int, descripcio : str, preguntes: list[Pregunta]):
-        self.id_questionari = id_questionari
-        self.id_propietari = id_propietari
-        self.titol = titol
-        self.categoria = categoria
-        self.dificultat = dificultat
-        self.descripcio = descripcio
-        self.preguntes = preguntes
+        self._id_questionari = id_questionari
+        self._id_propietari = id_propietari
+        self._titol = titol
+        self._categoria = categoria
+        self._dificultat = dificultat
+        self._descripcio = descripcio
+        self._preguntes = preguntes
 
     # GETTERS
 
@@ -65,7 +65,7 @@ class Questionari:
     
     def calcular_puntuacio(self):
         punts = 0
-        for p in self.preguntes:
-            punts += p.puntuacion
+        for p in self._preguntes:
+            punts += p.get_puntuacion()
 
         return punts
