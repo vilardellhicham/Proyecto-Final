@@ -8,14 +8,14 @@ database="quizzbattle", #nom de la db
 auth_plugin='mysql_native_password'
 )
 
-def afegir_usuari(conn, user, password,):
+def afegir_usuari(conn, nombre_usuario, contrasena,):
     cursor = conn.cursor()
     
     INSERT_QUERY = """
-    INSERT INTO users (user, password)
+    INSERT INTO usuarios (nombre_usuario, contrasena)
     VALUES (%s, %s, %s)
     """
-    valors = (user, password)
+    valors = (nombre_usuario, contrasena)
     
     cursor.execute(INSERT_QUERY, valors) 
     
@@ -29,3 +29,4 @@ def afegir_usuari(conn, user, password,):
         return True
     else:
         return False
+
