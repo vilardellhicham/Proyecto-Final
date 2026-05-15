@@ -1,0 +1,1 @@
+#metodo del juego y logica de el
