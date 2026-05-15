@@ -9,8 +9,6 @@ class Pregunta:
             return True
         else:
             return False
-        
-
 
     # GETTERS
 

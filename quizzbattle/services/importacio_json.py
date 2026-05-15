@@ -1,0 +1,1 @@
+#importacio json, y consultas al json para conseguir los parametros necesarios

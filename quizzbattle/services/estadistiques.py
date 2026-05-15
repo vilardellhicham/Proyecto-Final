@@ -1,0 +1,1 @@
+#calculo de estadisticas apartado en el mooddle
