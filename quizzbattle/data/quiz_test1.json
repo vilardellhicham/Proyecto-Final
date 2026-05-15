@@ -1,0 +1,32 @@
+{
+    "questionaris": [
+        {
+            "titol": "Quiz de programacio",
+            "categoria": "Programacio",
+            "dificultat": 2,
+            "descripcio": "Questionari basic de programacio",
+            "preguntes": [
+                {
+                    "tipus": "VF",
+                    "enunciat": "Python es un llenguatge de programacio",
+                    "resposta1": "Verdader",
+                    "resposta2": "Fals",
+                    "resposta3": "",
+                    "resposta4": "",
+                    "resposta_correcta": 1,
+                    "punts": 1
+                },
+                {
+                    "tipus": "MULTIPLE",
+                    "enunciat": "Quina paraula s'utilitza per crear una funcio en Python?",
+                    "resposta1": "func",
+                    "resposta2": "def",
+                    "resposta3": "function",
+                    "resposta4": "crear",
+                    "resposta_correcta": 2,
+                    "punts": 1
+                }
+            ]
+        }
+    ]
+}
