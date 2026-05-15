@@ -67,5 +67,4 @@ class Questionari:
         punts = 0
         for p in self._preguntes:
             punts += p.get_puntuacion()
-
         return punts
