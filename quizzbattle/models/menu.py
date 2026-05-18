@@ -1,3 +1,5 @@
+from services.joc import jugar_questionari
+
 def registre_usuari():
     print("\n--- REGISTRE USUARI ---")
     print("Aquí anirà el registre d'usuari")
@@ -20,15 +22,6 @@ def importar_questionari():
     print("\n--- IMPORTAR QÜESTIONARI ---")
     print("Aquí anirà la importació del JSON")
 
-
-def jugar_questionari():
-    print("\n--- JUGAR QÜESTIONARI INDIVIDUAL ---")
-    print("Aquí anirà la partida individual")
-
-
-def mode_1vs1():
-    print("\n--- MODE 1 VS 1 ---")
-    print("Aquí anirà el mode competitiu")
 
 
 def estadistiques_personals():
@@ -65,9 +58,11 @@ def menu_usuari():
             case "1":
                 importar_questionari()
             case "2":
-                jugar_questionari()
+                #jugar_questionari(usuari, questionari)
+                pass
             case "3":
-                mode_1vs1()
+                #mode_1vs1()
+                pass
             case "4":
                 estadistiques_personals()
             case "5":

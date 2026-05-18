@@ -1,1 +1,1 @@
-#calculo de estadisticas apartado en el mooddle
+#calculo de estadisticas apartado en el moodle

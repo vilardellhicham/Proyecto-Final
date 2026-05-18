@@ -72,3 +72,4 @@ class Partida:
     def set_data(self, valor_nuevo):
         self._data = valor_nuevo
         return self._data
+
