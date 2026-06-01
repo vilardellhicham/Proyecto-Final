@@ -14,82 +14,69 @@ class Usuari:
         self._puntuacio_total = puntuacio_total
 
     # GETTERS
-
     def get_id_usuari(self):
-        return self.id_usuari
+        return self._id_usuari
 
     def get_nom(self):
-        return self.nom
+        return self._nom
 
     def get_nom_usuari(self):
-        return self.nom_usuari
+        return self._nom_usuari
 
     def get_contrassenya(self):
-        return self.contrassenya
+        return self._contrassenya
 
     def get_email(self):
-        return self.email
+        return self._email
 
     def get_data_registre(self):
-        return self.data_registre
+        return self._data_registre
 
     def get_num_partides(self):
-        return self.num_partides
+        return self._num_partides
 
     def get_victories(self):
-        return self.victories
+        return self._victories
 
     def get_derrotes(self):
-        return self.derrotes
+        return self._derrotes
 
     def get_empats(self):
-        return self.empats
+        return self._empats
 
     def get_puntuacio_total(self):
-        return self.puntuacio_total
+        return self._puntuacio_total
 
     # SETTERS
+    def set_id_usuari(self, valor):
+        self._id_usuari = valor
 
-    def set_id_usuari(self, valor_nuevo):
-        self.id_usuari = valor_nuevo
-        return self.id_usuari
+    def set_nom(self, valor):
+        self._nom = valor
 
-    def set_nom(self, valor_nuevo):
-        self.nom = valor_nuevo
-        return self.nom
+    def set_nom_usuari(self, valor):
+        self._nom_usuari = valor
 
-    def set_nom_usuari(self, valor_nuevo):
-        self.nom_usuari = valor_nuevo
-        return self.nom_usuari
+    def set_contrassenya(self, valor):
+        self._contrassenya = valor
 
-    def set_contrassenya(self, valor_nuevo):
-        self.contrassenya = valor_nuevo
-        return self.contrassenya
+    def set_email(self, valor):
+        self._email = valor
 
-    def set_email(self, valor_nuevo):
-        self.email = valor_nuevo
-        return self.email
+    def set_data_registre(self, valor):
+        self._data_registre = valor
 
-    def set_data_registre(self, valor_nuevo):
-        self.data_registre = valor_nuevo
-        return self.data_registre
+    def set_num_partides(self, valor):
+        self._num_partides = valor
 
-    def set_num_partides(self, valor_nuevo):
-        self.num_partides = valor_nuevo
-        return self.num_partides
+    def set_victories(self, valor):
+        self._victories = valor
 
-    def set_victories(self, valor_nuevo):
-        self.victories = valor_nuevo
-        return self.victories
+    def set_derrotes(self, valor):
+        self._derrotes = valor
 
-    def set_derrotes(self, valor_nuevo):
-        self.derrotes = valor_nuevo
-        return self.derrotes
+    def set_empats(self, valor):
+        self._empats = valor
 
-    def set_empats(self, valor_nuevo):
-        self.empats = valor_nuevo
-        return self.empats
-
-    def set_puntuacio_total(self, valor_nuevo):
-        self.puntuacio_total = valor_nuevo
-        return self.puntuacio_total
+    def set_puntuacio_total(self, valor):
+        self._puntuacio_total = valor

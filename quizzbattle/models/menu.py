@@ -1,6 +1,14 @@
 from getpass import getpass
 
 from services.autenticacio import registrar_usuario, iniciar_sesion
+from services.importacio_json import ImportacioJSON
+from services.joc import jugar_questionari, mode_1vs1
+from services.estadistiques import (
+    mostrar_estadistiques_personals,
+    mostrar_estadistiques_questionari,
+    mostrar_ranking_global,
+)
+from database.database import conn
 
 
 def registre_usuari():
@@ -9,9 +17,9 @@ def registre_usuari():
     nombre_usuario = input("Nom d'usuari: ")
     email = input("Email: ")
     contrasena = getpass("Contrasenya: ")
-    confirmar_contrasena = getpass("Repeteix la contrasenya: ")
+    confirmar = getpass("Repeteix la contrasenya: ")
 
-    if contrasena != confirmar_contrasena:
+    if contrasena != confirmar:
         print("Error: les contrasenyes no coincideixen")
         return False
 
@@ -28,49 +36,42 @@ def iniciar_sessio():
     usuari_login = iniciar_sesion(usuari, contrasenya)
 
     if usuari_login is not None:
-        print("Sessió iniciada correctament. Benvingut/da,", usuari_login["nombre_usuario"])
+        print(f"Sessió iniciada correctament. Benvingut/da, {usuari_login['nombre_usuario']}!")
         return usuari_login
     else:
         print("Error: usuari/email o contrasenya incorrectes")
         return None
 
 
-def importar_questionari():
+def importar_questionari(usuari_actual):
     print("\n--- IMPORTAR QÜESTIONARI ---")
-    print("Aquí anirà la importació del JSON")
+    nom_fitxer = input("Nom del fitxer JSON (p.ex. data/quiz_test1.json): ").strip()
 
+    importer = ImportacioJSON()
+    dades = importer.llegir_fitxer(nom_fitxer)
+    if dades is None:
+        return
 
-def jugar_questionari():
-    print("\n--- JUGAR QÜESTIONARI INDIVIDUAL ---")
-    print("Aquí anirà la partida individual")
+    if not importer.validar_json(dades):
+        print("El fitxer JSON conté errors. No s'ha importat res.")
+        return
 
+    importer.mostrar_resum(dades)
+    confirmacio = input("\nVols importar aquests qüestionaris? (S/N): ").strip().upper()
+    if confirmacio != "S":
+        print("Importació cancel·lada.")
+        return
 
-def mode_1vs1():
-    print("\n--- MODE 1 VS 1 ---")
-    print("Aquí anirà el mode competitiu")
-
-
-def estadistiques_personals():
-    print("\n--- ESTADÍSTIQUES PERSONALS ---")
-    print("Aquí es mostraran les estadístiques de l'usuari")
-
-
-def estadistiques_questionari():
-    print("\n--- ESTADÍSTIQUES QÜESTIONARI ---")
-    print("Aquí es mostraran les estadístiques del qüestionari")
-
-
-def ranking_global():
-    print("\n--- RÀNQUING GLOBAL ---")
-    print("Aquí es mostrarà el rànquing global")
+    creats, actualitzats = importer.importar_a_bd(conn, dades, usuari_actual["id_usuario"])
+    print(f"\nQüestionaris creats:     {creats}")
+    print(f"Qüestionaris actualitzats: {actualitzats}")
 
 
 def menu_usuari(usuari_actual):
     opcio = ""
 
-    while opcio != "8":
-        print("\n===== MENÚ USUARI =====")
-        print("Usuari connectat:", usuari_actual["nombre_usuario"])
+    while opcio != "7":
+        print(f"\n===== MENÚ USUARI ({usuari_actual['nombre_usuario']}) =====")
         print("1. Importar qüestionari")
         print("2. Jugar qüestionari individual")
         print("3. Mode 1 vs 1")
@@ -79,24 +80,23 @@ def menu_usuari(usuari_actual):
         print("6. Consultar rànquing global")
         print("7. Sortir")
 
-        opcio = input("Escull una opció: ")
+        opcio = input("Escull una opció: ").strip()
 
         match opcio:
             case "1":
-                importar_questionari()
+                importar_questionari(usuari_actual)
             case "2":
-                jugar_questionari()
+                jugar_questionari(usuari_actual)
             case "3":
-                mode_1vs1()
+                mode_1vs1(usuari_actual)
             case "4":
-                estadistiques_personals()
+                mostrar_estadistiques_personals(usuari_actual)
             case "5":
-                estadistiques_questionari()
+                mostrar_estadistiques_questionari()
             case "6":
-                ranking_global()
+                mostrar_ranking_global()
             case "7":
                 print("Tancant sessió...")
-                opcio = "8"
             case _:
                 print("Opció incorrecta")
 
@@ -110,14 +110,13 @@ def menu_principal():
         print("2. Iniciar sessió")
         print("3. Sortir")
 
-        opcio = input("Escull una opció: ")
+        opcio = input("Escull una opció: ").strip()
 
         match opcio:
             case "1":
                 registre_usuari()
             case "2":
                 usuari_actual = iniciar_sessio()
-
                 if usuari_actual is not None:
                     menu_usuari(usuari_actual)
             case "3":
