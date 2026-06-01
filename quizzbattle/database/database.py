@@ -81,15 +81,16 @@ def actualitzar_cuestionario(conn, id_cuestionario, id_propietario, titulo, cate
     cursor.close()
     return cursor.rowcount == 1
 
-def obtenir_nombreCuestionarios(conn):
+def obtenir_nombrePreguntas(conn, id_cuestionario):
     cursor = conn.cursor()
     SELECT_QUERY = """
-    SELECT COUNT(*) FROM cuestionarios
+    SELECT COUNT(*) FROM preguntas WHERE id_cuestionario = %s
     """
-    cursor.execute(SELECT_QUERY)
-    count = cursor.fetchone()[0]
+    valors = (id_cuestionario,)
+    cursor.execute(SELECT_QUERY, valors)
+    count = cursor.fetchone()
     cursor.close()
-    return count
+    return count[0] if count else 0
 
 def afegir_pregunta(conn, id_cuestionario, tipo, enunciado, respuesta1, respuesta2, respuesta3, respuesta4, respuesta_correcta, puntos):
     cursor = conn.cursor()
@@ -126,3 +127,37 @@ def actualitzar_pregunta(conn, id_pregunta, id_cuestionario, tipo, enunciado, re
     conn.commit()
     cursor.close()
     return cursor.rowcount == 1
+
+def crear_partida(conn, id_cuestionario, estado, num_jugadores, ganador):
+    cursor = conn.cursor()
+    INSERT_QUERY = """
+    INSERT INTO partidas (id_cuestionario, estado, num_jugadores, ganador)
+    VALUES (%s, %s, %s, %s)
+    """
+    valors = (id_cuestionario, estado, num_jugadores, ganador)
+    cursor.execute(INSERT_QUERY, valors)
+    conn.commit()
+    cursor.close()
+    return cursor.rowcount == 1
+
+def obtenir_partida(conn, id_partida):
+    cursor = conn.cursor()
+    SELECT_QUERY = """
+    SELECT * FROM partidas WHERE id_partida = %s
+    """
+    valors = (id_partida,)
+    cursor.execute(SELECT_QUERY, valors)
+    partida_data = cursor.fetchone()
+    cursor.close()
+    return partida_data
+
+def obtenir_resultats(conn, id_partida):
+    cursor = conn.cursor()
+    SELECT_QUERY = """
+    SELECT * FROM resultados WHERE id_partida = %s
+    """
+    valors = (id_partida,)
+    cursor.execute(SELECT_QUERY, valors)
+    resultados_data = cursor.fetchall()
+    cursor.close()
+    return resultados_data
